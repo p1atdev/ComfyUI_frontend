@@ -549,7 +549,7 @@ class ComfyApi extends EventTarget {
    * Gets a user data file for the current user
    */
   async getUserData(file: string, options?: RequestInit) {
-    return this.fetchApi(`/userdata/${encodeURIComponent(file)}`, options)
+    return this.fetchApi(`/userdata/${encodeURI(file)}`, options)
   }
 
   /**
@@ -569,7 +569,7 @@ class ComfyApi extends EventTarget {
     } = { overwrite: true, stringify: true, throwOnError: true }
   ): Promise<Response> {
     const resp = await this.fetchApi(
-      `/userdata/${encodeURIComponent(file)}?overwrite=${options.overwrite}`,
+      `/userdata/${encodeURI(file)}?overwrite=${options.overwrite}`,
       {
         method: 'POST',
         body: options?.stringify ? JSON.stringify(data) : data,
@@ -590,7 +590,7 @@ class ComfyApi extends EventTarget {
    * @param { string } file The name of the userdata file to delete
    */
   async deleteUserData(file: string) {
-    const resp = await this.fetchApi(`/userdata/${encodeURIComponent(file)}`, {
+    const resp = await this.fetchApi(`/userdata/${encodeURI(file)}`, {
       method: 'DELETE'
     })
     return resp
@@ -607,7 +607,7 @@ class ComfyApi extends EventTarget {
     options = { overwrite: false }
   ) {
     const resp = await this.fetchApi(
-      `/userdata/${encodeURIComponent(source)}/move/${encodeURIComponent(dest)}?overwrite=${options?.overwrite}`,
+      `/userdata/${encodeURI(source)}/move/${encodeURI(dest)}?overwrite=${options?.overwrite}`,
       {
         method: 'POST'
       }
